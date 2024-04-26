@@ -8,8 +8,8 @@ import requests
 
 streamlit.title = "the amazing app. horrah!"
 inputField = streamlit.text_input("what you wanna say? you can keep this field empty if you dont want to interact")
-
-
+chatArea = streamlit.text_area("the boys chat! no girlies >:(")
+agentResponse = ""
 headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzIyMDgwM2EtZDc2OS00NTg0LWExZjItZTEzNDgyOWZiYWNiIiwidHlwZSI6ImFwaV90b2tlbiJ9.WGkdfiAtmL9DoGznRa8_AOl76KFC2gNWlkwkX5Z8hCw"}
 
 DrStrange = "Dr. Stephen Vincent Strange is a character appearing in American comic books published by Marvel Comics. \nThe character starts as an intelligent and egotistically arrogant neurosurgeon who is injured in a car accident. Because his hands had suffered severe nerve damage from the accident, he was told that current medical therapy and rehabilitation would not be enough to enable him to practice again as a surgeon. Unable to accept this prognosis, he travels the world searching for alternative ways of healing, which leads him to the Ancient One, the Sorcerer Supreme. Strange becomes his student and learns to be a master of both the mystical and the martial arts. He acquires an assortment of mystical objects, including the powerful Eye of Agamotto and Cloak of Levitation, and takes up residence in a mansion referred to as the Sanctum Sanctorum, located at 177A Bleecker Street, Greenwich Village, Manhattan, New York City. Strange assumes the title of Sorcerer Supreme and, with his friend and valet Wong, defends the world from mystical threats.\n\nIn live-action adaptations, the character was first portrayed by Peter Hooten in the 1978 television film Dr. Strange. Since 2016, Benedict Cumberbatch has portrayed the role of Stephen Strange in the Marvel Cinematic Universe.\n\ndoctor strange is now in trouble. and needs to discuses the multiverse with his closest friends and allies monkey D loffy, sherlock holmes, aiden pearce"
@@ -104,7 +104,7 @@ def SherlockMessage(idx):
     result = json.loads(response.text)
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
-    print("Sherlock" + result['openai']['generated_text'])
+    agentResponse = "Sherlock" + result['openai']['generated_text']
     idx += 1
     ConvoHistory.append(response.content)
 
@@ -118,4 +118,5 @@ while(numOfCovos < 20):
         ConvoHistory.append({'role': 'user', 'message': inputField})
     funcs = [StrangeMessage, AidenMessage, LuffyMessage, SherlockMessage]
     random.choice(funcs)(ConvoIdx)
+    streamlit.write(agentResponse)
     time.sleep(200)
