@@ -37,6 +37,7 @@ result = json.loads(response.text)
 
 ConvoHistory = [{'role':'user','message': result['openai']['generated_text']}]
 ConvoIdx += 1
+streamlit.write("Everyone: Dr strange! please wee need your help with the multi-verse!")
 agentResponse = "Dr Strange: " + result['openai']['generated_text']
 
 def StrangeMessage(idx):
