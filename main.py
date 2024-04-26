@@ -1,8 +1,12 @@
 import json
 import random
 import time
+import streamlit
+
 
 import requests
+
+streamlit.title = "the amazing app. horrah!"
 
 headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzIyMDgwM2EtZDc2OS00NTg0LWExZjItZTEzNDgyOWZiYWNiIiwidHlwZSI6ImFwaV90b2tlbiJ9.WGkdfiAtmL9DoGznRa8_AOl76KFC2gNWlkwkX5Z8hCw"}
 
