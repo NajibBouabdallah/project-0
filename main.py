@@ -8,7 +8,6 @@ import requests
 
 streamlit.title = "the amazing app. horrah!"
 inputField = streamlit.text_input("what you wanna say? you can keep this field empty if you dont want to interact")
-chatArea = streamlit.text_area("the boys chat! no girlies >:(")
 agentResponse = ""
 headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzIyMDgwM2EtZDc2OS00NTg0LWExZjItZTEzNDgyOWZiYWNiIiwidHlwZSI6ImFwaV90b2tlbiJ9.WGkdfiAtmL9DoGznRa8_AOl76KFC2gNWlkwkX5Z8hCw"}
 
@@ -38,7 +37,7 @@ result = json.loads(response.text)
 
 ConvoHistory = [{'role':'user','message': result['openai']['generated_text']}]
 ConvoIdx += 1
-print("Dr Strange: " + result['openai']['generated_text'])
+agentResponse = "Dr Strange: " + result['openai']['generated_text']
 
 def StrangeMessage(idx):
     payload = {
@@ -55,7 +54,7 @@ def StrangeMessage(idx):
     result = json.loads(response.text)
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
-    print("Dr strange: " + result['openai']['generated_text'])
+    agentResponse = "Dr strange: " + result['openai']['generated_text']
     idx += 1
 
 def LuffyMessage(idx):
@@ -72,7 +71,7 @@ def LuffyMessage(idx):
     result = json.loads(response.text)
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
-    print("Luffy: " + result['openai']['generated_text'])
+    agentResponse = "Luffy: " + result['openai']['generated_text']
     idx += 1
 def AidenMessage(idx):
     payload = {
@@ -88,7 +87,7 @@ def AidenMessage(idx):
     result = json.loads(response.text)
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
-    print("Aiden: " + result['openai']['generated_text'])
+    agentResponse = "Aiden: " + result['openai']['generated_text']
     idx += 1
 def SherlockMessage(idx):
     payload = {
@@ -104,7 +103,7 @@ def SherlockMessage(idx):
     result = json.loads(response.text)
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
-    agentResponse = "Sherlock" + result['openai']['generated_text']
+    agentResponse = "Sherlock: " + result['openai']['generated_text']
     idx += 1
     ConvoHistory.append(response.content)
 
