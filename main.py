@@ -121,4 +121,4 @@ while(numOfCovos < 20):
     random.choice(funcs)(ConvoIdx)
     streamlit.write(agentResponse)
     streamlit.write("DEBUG: Agent DONE TALKING")
-    time.sleep(100)
+    time.sleep(200)
