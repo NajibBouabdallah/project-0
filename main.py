@@ -120,4 +120,5 @@ while(numOfCovos < 20):
     funcs = [StrangeMessage, AidenMessage, LuffyMessage, SherlockMessage]
     random.choice(funcs)(ConvoIdx)
     streamlit.write(agentResponse)
+    streamlit.write("DEBUG: Agent DONE TALKING")
     time.sleep(200)
