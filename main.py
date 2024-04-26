@@ -7,6 +7,8 @@ import streamlit
 import requests
 
 streamlit.title = "the amazing app. horrah!"
+inputField = streamlit.text_input("what you wanna say? you can keep this field empty if you dont want to interact")
+
 
 headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzIyMDgwM2EtZDc2OS00NTg0LWExZjItZTEzNDgyOWZiYWNiIiwidHlwZSI6ImFwaV90b2tlbiJ9.WGkdfiAtmL9DoGznRa8_AOl76KFC2gNWlkwkX5Z8hCw"}
 
@@ -111,10 +113,9 @@ numOfCovos = 0
 while(numOfCovos < 20):
     chance = random.random()
     numOfCovos += 1
-    usermsg = input()
-    if(usermsg != ""):
-        print("user: " + usermsg)
-        ConvoHistory.append({'role': 'user', 'message': usermsg})
+    if(inputField != ""):
+        print("user: " + inputField)
+        ConvoHistory.append({'role': 'user', 'message': inputField})
     funcs = [StrangeMessage, AidenMessage, LuffyMessage, SherlockMessage]
     random.choice(funcs)(ConvoIdx)
     time.sleep(200)
