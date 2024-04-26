@@ -1,13 +1,8 @@
 import json
 import random
 import time
-import streamlit
-
-
 import requests
 
-#streamlit.title = "the amazing app. horrah!"
-#inputField = streamlit.text_input("what you wanna say? you can keep this field empty if you dont want to interact")
 agentResponse = ""
 
 headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzIyMDgwM2EtZDc2OS00NTg0LWExZjItZTEzNDgyOWZiYWNiIiwidHlwZSI6ImFwaV90b2tlbiJ9.WGkdfiAtmL9DoGznRa8_AOl76KFC2gNWlkwkX5Z8hCw"}
@@ -38,15 +33,14 @@ result = json.loads(response.text)
 
 ConvoHistory = [{'role':'user','message': result['openai']['generated_text']}]
 ConvoIdx += 1
-streamlit.write("Everyone: Dr strange! please we need your help with the multi-verse!")
 agentResponse = "Dr Strange: " + result['openai']['generated_text']
-
+print(agentResponse)
 def StrangeMessage(idx):
     payload = {
         "providers": "openai",
         "text": ConvoHistory[-1]['message'],
         "chatbot_global_action": DrStrange,
-        "previous_history": [],
+        "previous_history": ConvoHistory,
         "temperature": 1,
         "max_tokens": 256,
         "fallback_providers": ""
@@ -57,6 +51,7 @@ def StrangeMessage(idx):
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
     agentResponse = "Dr strange: " + result['openai']['generated_text']
+    print(agentResponse)
     idx += 1
 
 def LuffyMessage(idx):
@@ -64,7 +59,7 @@ def LuffyMessage(idx):
         "providers": "openai",
         "text": ConvoHistory[-1]['message'],
         "chatbot_global_action": Luffy,
-        "previous_history": [],
+        "previous_history": ConvoHistory,
         "temperature": 1,
         "max_tokens": 256,
         "fallback_providers": ""
@@ -74,13 +69,14 @@ def LuffyMessage(idx):
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
     agentResponse = "Luffy: " + result['openai']['generated_text']
+    print(agentResponse)
     idx += 1
 def AidenMessage(idx):
     payload = {
         "providers": "openai",
         "text": ConvoHistory[-1]['message'],
         "chatbot_global_action": Aiden,
-        "previous_history": [],
+        "previous_history": ConvoHistory,
         "temperature": 1,
         "max_tokens": 256,
         "fallback_providers": ""
@@ -90,13 +86,15 @@ def AidenMessage(idx):
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
     agentResponse = "Aiden: " + result['openai']['generated_text']
+    print(agentResponse)
     idx += 1
+
 def SherlockMessage(idx):
     payload = {
         "providers": "openai",
         "text": ConvoHistory[-1]['message'],
         "chatbot_global_action": Sherlock,
-        "previous_history": [],
+        "previous_history": ConvoHistory,
         "temperature": 1,
         "max_tokens": 256,
         "fallback_providers": ""
@@ -106,6 +104,7 @@ def SherlockMessage(idx):
     strResponse = result['openai']['generated_text']
     ConvoHistory.append({'role':'user','message': strResponse})
     agentResponse = "Sherlock: " + result['openai']['generated_text']
+    print(agentResponse)
     idx += 1
     ConvoHistory.append(response.content)
 
@@ -114,11 +113,12 @@ numOfCovos = 0
 while(numOfCovos < 20):
     chance = random.random()
     numOfCovos += 1
-    #if(inputField != ""):
-        #print("user: " + inputField)
-        #ConvoHistory.append({'role': 'user', 'message': inputField})
+    print("Awaiting User input. Please be warry the AI response can be slow")
+    userInput = input()
+    if(userInput != ""):
+        print("user: " + userInput)
+        ConvoHistory.append({'role': 'user', 'message': userInput})
     funcs = [StrangeMessage, AidenMessage, LuffyMessage, SherlockMessage]
     random.choice(funcs)(ConvoIdx)
-    streamlit.write(agentResponse)
-    streamlit.write("DEBUG: Agent DONE TALKING")
-    time.sleep(200)
+    ConvoIdx += 1
+    time.sleep(100)
