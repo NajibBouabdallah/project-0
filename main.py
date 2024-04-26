@@ -112,9 +112,9 @@ numOfCovos = 0
 while(numOfCovos < 20):
     chance = random.random()
     numOfCovos += 1
-    if(inputField != ""):
-        print("user: " + inputField)
-        ConvoHistory.append({'role': 'user', 'message': inputField})
+    #if(inputField != ""):
+        #print("user: " + inputField)
+        #ConvoHistory.append({'role': 'user', 'message': inputField})
     funcs = [StrangeMessage, AidenMessage, LuffyMessage, SherlockMessage]
     random.choice(funcs)(ConvoIdx)
     streamlit.write(agentResponse)
