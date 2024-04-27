@@ -110,7 +110,7 @@ def SherlockMessage(idx):
 
 
 numOfCovos = 0
-while(numOfCovos < 15):
+while(numOfCovos < 20):
     chance = random.random()
     numOfCovos += 1
     print("Awaiting User input. Please be warry the AI response can be slow")
